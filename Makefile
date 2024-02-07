@@ -6,7 +6,7 @@
 #    By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 15:13:16 by ade-beco          #+#    #+#              #
-#    Updated: 2024/02/07 10:18:50 by ade-beco         ###   ########.fr        #
+#    Updated: 2024/02/07 15:29:15 by ade-beco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,15 +22,15 @@ INC			=		-I includes/$(NAME).h
 
 all: 		$(SO_LONG)
 
-$(SO_LONG):	$(OBJECTS) $(LIBFT_PATH)
+$(SO_LONG):	$(OBJECTS)
 					@echo "Creating SO_LONG Executable..."
 					@ar -rcs $(SO_LONG) $(OBJECTS)
-					@gcc $(SO_LONG) -fsanitize=address -o $(SO_LONG)
+					@cc $(SO_LONG) -Lmlx -lmlx -framework OpenGL -framework AppKit -fsanitize=address -o $(SO_LONG)
 					@echo "OK !"
 
 $(OBJECTS):	$(SRCS_D)
 					@echo "Compiling SO_LONG..."
-					@cc -Wall -Wextra -Werror -c $(INC) $(SRCS_D)
+					@cc -Wall -Wextra -Werror -Imlx -c $(INC) $(SRCS_D)
 					@echo "OK !"
 
 clean:

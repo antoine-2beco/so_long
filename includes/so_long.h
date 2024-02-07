@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/02/07 10:17:46 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:29:54 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+#include <mlx.h>
 
 // ft_printf && ft_printf_utils
 int		ft_printf(const char *str, ...);
