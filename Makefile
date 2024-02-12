@@ -6,7 +6,7 @@
 #    By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 15:13:16 by ade-beco          #+#    #+#              #
-#    Updated: 2024/02/12 10:32:00 by ade-beco         ###   ########.fr        #
+#    Updated: 2024/02/12 15:59:05 by ade-beco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ LIBFT		=		libft
 LIBFT_PATH	=		./libft/
 
 SRC_PATH	=		./src/
-SRCS 		=		so_long.c check_map.c
-SRCS_D 		=		$(SRC_PATH)so_long.c $(SRC_PATH)check_map.c
+SRCS 		=		so_long.c check_map.c map_compliant.c
+SRCS_D 		=		$(SRC_PATH)so_long.c $(SRC_PATH)check_map.c $(SRC_PATH)map_compliant.c
 
 OBJECTS		=		$(SRCS:.c=.o)
 

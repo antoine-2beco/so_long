@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/02/12 15:53:11 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:23:58 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@
 
 int	error(char *str);
 
+// check_map.c
 int	check_map(t_list **map, char *map_file);
+
+// map_compliant.c 
+int	valid_map_content(t_list **map);
+
 
 
 #endif
