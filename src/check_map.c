@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/02/12 12:00:31 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:09:22 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ static int	map_parsing(t_list **map, char *map_file)
 	return (1);
 }
 
-int	check_map(char *map_file)
+int	check_map(t_list **map, char **map_file)
 {
-	t_list	*map;
-
-	map_parsing(&map, map_file);
+	map_parsing(map, map_file);
 	while (map)
 	{
 		ft_printf("%s", map->content);
