@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/02/12 16:23:58 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:51:12 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <mlx.h>
+//# include <mlx.h>
 # include <fcntl.h>
 # include <stdio.h>
 
@@ -30,6 +30,7 @@ int	check_map(t_list **map, char *map_file);
 
 // map_compliant.c 
 int	valid_map_content(t_list **map);
+int	rectangular_map(t_list **map);
 
 
 

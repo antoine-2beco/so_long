@@ -6,7 +6,7 @@
 #    By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 15:13:16 by ade-beco          #+#    #+#              #
-#    Updated: 2024/02/12 15:59:05 by ade-beco         ###   ########.fr        #
+#    Updated: 2024/02/27 15:54:12 by ade-beco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,38 +17,40 @@ LIBFT_PATH	=		./libft/
 
 SRC_PATH	=		./src/
 SRCS 		=		so_long.c check_map.c map_compliant.c
-SRCS_D 		=		$(SRC_PATH)so_long.c $(SRC_PATH)check_map.c $(SRC_PATH)map_compliant.c
+SRCS_D 		=		$(addprefix $(SRC_PATH), $(SRCS))
 
-OBJECTS		=		$(SRCS:.c=.o)
+OBJECTS		=		$(SRCS_D:.c=.o)
 
-INC			=		-I includes/$(NAME).h $(LIBFT_PATH)$(LIBFT).h
+INC			=		-I includes/$(SO_LONG).h -I $(LIBFT_PATH)$(LIBFT).h
 
-all: 		$(SO_LONG)
+all: 		$(OBJECTS) $(SO_LONG)
 
-$(SO_LONG):	$(OBJECTS) $(LIBFT_PATH)
+%.o:		%.c
+					@gcc -Wall -Wextra -Werror -Imlx -c $< -o $(<:c=o)
+
+$(SO_LONG):	$(OBJECTS)
+					@echo "Compiling Libft..."
 					@make bonus -C $(LIBFT_PATH) $(LIBFT).a
 					@cp $(LIBFT_PATH)$(LIBFT).a $(SO_LONG)
-					@echo "Creating SO_LONG Executable..."
-					@ar -rcs $(SO_LONG) $(OBJECTS)
-					@cc $(SO_LONG) -Lmlx -lmlx -framework OpenGL -framework AppKit -fsanitize=address -o $(SO_LONG)
 					@echo "OK !"
-
-$(OBJECTS):	$(SRCS_D)
-					@echo "Compiling SO_LONG..."
-					@cc -Wall -Wextra -Werror -Imlx -c $(INC) $(SRCS_D)
+					@echo "Compiling and Creating So_Long..."
+					@ar -rcs $(SO_LONG) $(OBJECTS)
+					@gcc $(SO_LONG) -Wall -Wextra -Werror -fsanitize=address $(INC) -o $(SO_LONG)
+# -Lmlx -lmlx -framework OpenGL -framework AppKit
 					@echo "OK !"
 
 clean:
 					@make clean -C $(LIBFT_PATH)
-					@echo "Cleaning SO_LONG Objects..."
+					@echo "Cleaning Push_Swap Objects..."
 					@rm -f $(OBJECTS)
 					@echo "OK !"
 
-fclean:		clean
+fclean:			clean
 					@make fclean -C $(LIBFT_PATH)
-					@echo "Cleaning SO_LONG..."
-					@rm -f $(SO_LONG)
+					@echo "Cleaning Push_Swap..."
+					@rm -f $(PUSH_SWAP)
 					@echo "OK !"
 
-re:			fclean all 
+re:			fclean all
+
 .PHONY:		all clean fclean re

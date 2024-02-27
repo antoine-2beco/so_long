@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/02/12 16:32:11 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:12:55 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	map_compliant(t_list **map)
 {
-	if (!(*map)->content)
-		return (error("Map is empty"));
 	if (!valid_map_content(map))
+		return (0);
+	if (!rectangular_map(map))
 		return (0);
 	return (1);
 }
@@ -25,13 +25,17 @@ static int	map_parsing(t_list **map, char *map_file)
 {
 	int		fd;
 	char	*line;
+	int		l;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
 		return (error("Map opening failed"));
-	while (1)
+	l = -1;
+	while (l++ >= -1)
 	{
 		line = get_next_line(fd);
+		if (!line && l == 0)
+			return (error("Map is empty"));
 		if (!line)
 			break ;
 		ft_lstadd_back(map, ft_lstnew(line));
@@ -51,10 +55,7 @@ int	check_map(t_list **map, char *map_file)
 }
 
 // error system
-// .ber file
 
-// not empty
-// valid content
 // rectangular
 
 // walls
