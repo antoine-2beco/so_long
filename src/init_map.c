@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/02/27 17:12:55 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:16:15 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	map_parsing(t_list **map, char *map_file)
 	return (1);
 }
 
-int	check_map(t_list **map, char *map_file)
+int	init_map(t_list **map, char *map_file)
 {
 	if (!ft_strnstr(map_file + ft_strlen(map_file) - 4, ".ber", 4))
 		return (error("Not a .ber file"));
