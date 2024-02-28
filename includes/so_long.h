@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/02/28 15:15:21 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:29:05 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_game
 int	error(char *str);
 
 // check_map.c
-int	init_map(t_list **map, char *map_file);
+int	init_map(t_game **game, t_list **map, char *map_file);
 
 // map_compliant.c 
 int	valid_map_content(t_list **map);

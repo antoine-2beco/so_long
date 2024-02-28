@@ -6,17 +6,20 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/02/28 15:16:15 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:48:49 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static int	map_compliant(t_list **map)
+static int	map_compliant(t_game **game)
 {
-	if (!valid_map_content(map))
+	t_list	*map;
+
+	map = (*game)->map;
+	if (!valid_map_content(&map))
 		return (0);
-	if (!rectangular_map(map))
+	if (!rectangular_map(&map))
 		return (0);
 	return (1);
 }
@@ -43,13 +46,20 @@ static int	map_parsing(t_list **map, char *map_file)
 	return (1);
 }
 
-int	init_map(t_list **map, char *map_file)
+int	init_map(t_game **game, t_list **map, char *map_file)
 {
+	t_game	*temp;
+
 	if (!ft_strnstr(map_file + ft_strlen(map_file) - 4, ".ber", 4))
 		return (error("Not a .ber file"));
 	if (!map_parsing(map, map_file))
 		return (0);
-	if (!map_compliant(map))
+	temp = *game;
+	temp->map = *map;
+	temp->map_height = 0;
+	temp->map_lenght = 0;
+	game = &temp;
+	if (!map_compliant(game))
 		return (0);
 	return (1);
 }
