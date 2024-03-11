@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/02/28 15:48:49 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:34:22 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	init_map(t_game **game, t_list **map, char *map_file)
 		return (0);
 	temp = *game;
 	temp->map = *map;
-	temp->map_height = 0;
+	temp->map_height = ft_lstsize(*map);
 	temp->map_lenght = 0;
 	game = &temp;
 	if (!map_compliant(game))

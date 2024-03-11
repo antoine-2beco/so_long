@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/02/27 17:31:53 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:44:54 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,27 @@ int	valid_map_content(t_list **map)
 	return (1);
 }
 
-
 #include <stdio.h>
 int	rectangular_map(t_list **map)
 {
-	int		i;
-	int		j;
-	int		k;
-	char	*line;
 	t_list	*temp;
+	char	*line;
+	int		lenght;
 
 	temp = *map;
-	k = -1;
-	while (temp && k++ >= -1)
+	line = ft_strtrim(temp->content, "\n");
+	if (!line)
+		error ("Malloc failed in ft_strtrim");
+	lenght = ft_strlen(line);
+	free (line);
+	while (temp)
 	{
-		line = temp->content;
-		j = 0;
-		while (line[j])
-		{
-			if (j == INT32_MAX && line[j + 1])
-				return (error("Map exceed maximal size"));
-			j++;
-		}
-		printf("line = %s -- i = %i -- j = %i\n", line, i, j);
-		if ((j != i && i))
+		line = ft_strtrim(temp->content, "\n");
+		if (!line)
+			error ("Malloc failed in ft_strtrim");
+		if (lenght != (int)(ft_strlen(line)))
 			return (error("Map is not rectangular"));
-		if (k == INT32_MAX && temp->next)
-			return (error("Map exceed maximal size"));
-		i = j;
+		free (line);
 		temp = temp->next;
 	}
 	return (1);
