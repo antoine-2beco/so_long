@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/11 12:44:54 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:13:11 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	valid_map_content(t_list **map)
 	return (1);
 }
 
-#include <stdio.h>
 int	rectangular_map(t_list **map)
 {
 	t_list	*temp;
@@ -61,5 +60,29 @@ int	rectangular_map(t_list **map)
 		free (line);
 		temp = temp->next;
 	}
+	return (1);
+}
+
+int	walls_surround(t_list **map, int map_lenght)
+{
+	t_list	*temp;
+	int		i;
+
+	temp = *map;
+	i = 0;
+	while (i < map_lenght)
+		if (((char *)temp->content)[i++] != '1')
+			return (error("Walls aren't surrounding the map 1"));
+	while (temp->next)
+	{
+		if (((char *)temp->content)[0] != '1'
+			|| ((char *)temp->content)[map_lenght - 1] != '1')
+			return (error("Walls aren't surrounding the map 2"));
+		temp = temp->next;
+	}
+	i = 0;
+	while (i < map_lenght)
+		if (((char *)temp->content)[i++] != '1')
+			return (error("Walls aren't surrounding the map 3"));
 	return (1);
 }
