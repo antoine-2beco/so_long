@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/12 12:14:34 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:35:49 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static int	map_compliant(t_game **game)
 {
+	t_game	*temp_game;
 	t_list	*map;
 
+	temp_game = *game;
 	map = (*game)->map;
 	if (!valid_map_content(&map))
 		return (0);
@@ -23,8 +25,9 @@ static int	map_compliant(t_game **game)
 		return (0);
 	if (!walls_surround(&map, (*game)->map_lenght))
 		return (0);
-	if (!specials_components((&map)))
+	if (!specials_components(&temp_game))
 		return (0);
+	*game = temp_game;
 	return (1);
 }
 
@@ -62,6 +65,7 @@ int	init_map(t_game **game, t_list **map, char *map_file)
 	temp->map = *map;
 	temp->map_height = ft_lstsize(*map);
 	temp->map_lenght = ft_strlen(ft_strtrim(temp->map->content, "\n"));
+	temp->collectibles = 0;
 	game = &temp;
 	if (!map_compliant(game))
 		return (0);
@@ -72,7 +76,4 @@ int	init_map(t_game **game, t_list **map, char *map_file)
 
 // rectangular
 
-// one spawn
-// one exit
-// one collectible
 // valid path

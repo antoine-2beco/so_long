@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/12 12:43:33 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:41:21 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,30 +87,58 @@ int	walls_surround(t_list **map, int map_lenght)
 	return (1);
 }
 
-int	specials_components(t_list **map, int map_lenght)
+static int	saving_components(t_game **game)
+{
+	t_list	*temp;
+	int		x;
+	int		y;
+
+	temp = (*game)->map;
+	y = -1;
+	while (temp && y++)
+	{
+		x = -1;
+		while (x++ < ((*game)->map_lenght - 1))
+		{
+			if (((char *)temp->content)[x] == 'E')
+			{
+				(*game)->x_exit = x;
+				(*game)->y_exit = y;
+			}
+			if (((char *)temp->content)[x] == 'P')
+			{
+				(*game)->x_spawn = x;
+				(*game)->x_spawn = y;
+			}
+		}
+		temp = temp->next;
+	}
+	return (1);
+}
+
+int	specials_components(t_game **game)
 {
 	t_list	*temp;
 	int		i;
 	int		exit_spawn;
-	int		collectibles;
 
-	temp = *map;
+	temp = (*game)->map;
 	exit_spawn = 0;
-	collectibles = 0;
 	while (temp)
 	{
 		i = 0;
-		while (i < map_lenght)
+		while (i < (*game)->map_lenght)
 		{
 			if (((char *)temp->content)[i] == 'E'
 				|| ((char *)temp->content)[i] == 'P')
 				exit_spawn++;
 			if (((char *)temp->content)[i++] == 'C')
-				collectibles++;
+				(*game)->collectibles++;
 		}
 		temp = temp->next;
 	}
-	if (exit_spawn != 2 || collectibles < 1)
+	if (exit_spawn != 2 || (*game)->collectibles < 1)
 		return (error("Map components problem"));
+	saving_components(game);
 	return (1);
 }
