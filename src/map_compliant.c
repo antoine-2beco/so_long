@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/12 12:13:11 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:43:33 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,45 @@ int	walls_surround(t_list **map, int map_lenght)
 	i = 0;
 	while (i < map_lenght)
 		if (((char *)temp->content)[i++] != '1')
-			return (error("Walls aren't surrounding the map 1"));
+			return (error("Walls aren't surrounding the map"));
 	while (temp->next)
 	{
 		if (((char *)temp->content)[0] != '1'
 			|| ((char *)temp->content)[map_lenght - 1] != '1')
-			return (error("Walls aren't surrounding the map 2"));
+			return (error("Walls aren't surrounding the map"));
 		temp = temp->next;
 	}
 	i = 0;
 	while (i < map_lenght)
 		if (((char *)temp->content)[i++] != '1')
-			return (error("Walls aren't surrounding the map 3"));
+			return (error("Walls aren't surrounding the map"));
+	return (1);
+}
+
+int	specials_components(t_list **map, int map_lenght)
+{
+	t_list	*temp;
+	int		i;
+	int		exit_spawn;
+	int		collectibles;
+
+	temp = *map;
+	exit_spawn = 0;
+	collectibles = 0;
+	while (temp)
+	{
+		i = 0;
+		while (i < map_lenght)
+		{
+			if (((char *)temp->content)[i] == 'E'
+				|| ((char *)temp->content)[i] == 'P')
+				exit_spawn++;
+			if (((char *)temp->content)[i++] == 'C')
+				collectibles++;
+		}
+		temp = temp->next;
+	}
+	if (exit_spawn != 2 || collectibles < 1)
+		return (error("Map components problem"));
 	return (1);
 }

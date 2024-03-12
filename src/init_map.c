@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/12 12:05:26 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:14:34 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int	map_compliant(t_game **game)
 	if (!rectangular_map(&map))
 		return (0);
 	if (!walls_surround(&map, (*game)->map_lenght))
+		return (0);
+	if (!specials_components((&map)))
 		return (0);
 	return (1);
 }
@@ -70,7 +72,6 @@ int	init_map(t_game **game, t_list **map, char *map_file)
 
 // rectangular
 
-// walls
 // one spawn
 // one exit
 // one collectible
