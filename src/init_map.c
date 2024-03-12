@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/12 15:57:10 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:59:05 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ static int	map_compliant(t_game **game)
 	if (!specials_components(&temp_game))
 		return (0);
 	*game = temp_game;
+	printf("exit  x : %i - y : %i\n", (*game)->x_exit, (*game)->y_exit);
+	printf("spawn  x : %i - y : %i\n", (*game)->x_spawn, (*game)->y_spawn);
+	printf("collectibles  %i", (*game)->collectibles);
 	return (1);
 }
 

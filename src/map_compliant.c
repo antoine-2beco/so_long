@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/12 15:55:28 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:02:13 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ static int	saving_components(t_game **game)
 	int		x;
 	int		y;
 
-	temp = (*game)->map;
-	y = 0;
-	while (temp)
+	temp = ((*game)->map);
+	y = -1;
+	while (temp && y++ >= -1)
 	{
 		x = -1;
 		while (x++ < ((*game)->map_lenght - 1))
@@ -112,7 +112,6 @@ static int	saving_components(t_game **game)
 			}
 		}
 		temp = temp->next;
-		y++;
 	}
 	return (1);
 }
