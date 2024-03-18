@@ -6,35 +6,28 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/12 15:59:05 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/18 12:35:11 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static int	map_compliant(t_game **game)
+static int	map_compliant(t_game *game)
 {
-	t_game	*temp_game;
-	t_list	*map;
-
-	temp_game = *game;
-	map = (*game)->map;
-	if (!valid_map_content(&map))
+	if (!valid_map_content(game->map))
 		return (0);
-	if (!rectangular_map(&map))
+	if (!rectangular_map(game->map))
 		return (0);
-	if (!walls_surround(&map, (*game)->map_lenght))
+	if (!walls_surround(game->map))
 		return (0);
-	if (!specials_components(&temp_game))
+	if (!specials_components(game))
 		return (0);
-	*game = temp_game;
-	printf("exit  x : %i - y : %i\n", (*game)->x_exit, (*game)->y_exit);
-	printf("spawn  x : %i - y : %i\n", (*game)->x_spawn, (*game)->y_spawn);
-	printf("collectibles  %i", (*game)->collectibles);
+	if (!check_path(game))
+		return (0);
 	return (1);
 }
 
-static int	map_parsing(t_list **map, char *map_file)
+static int	map_parsing(t_map *map, char *map_file)
 {
 	int		fd;
 	char	*line;
@@ -43,40 +36,31 @@ static int	map_parsing(t_list **map, char *map_file)
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
 		return (error("Map opening failed"));
-	l = -1;
-	while (l++ >= -1)
+	l = 0;
+	while (l >= 0)
 	{
 		line = get_next_line(fd);
 		if (!line && l == 0)
 			return (error("Map is empty"));
 		if (!line)
 			break ;
-		ft_lstadd_back(map, ft_lstnew(line));
+		map->content[l] = line;
+		l++;
 	}
 	return (1);
 }
 
-int	init_map(t_game **game, t_list **map, char *map_file)
+int	init_map(t_game *game, t_map *map, char *map_file)
 {
-	t_game	*temp;
-
 	if (!ft_strnstr(map_file + ft_strlen(map_file) - 4, ".ber", 4))
 		return (error("Not a .ber file"));
 	if (!map_parsing(map, map_file))
 		return (0);
-	temp = *game;
-	temp->map = *map;
-	temp->map_height = ft_lstsize(*map);
-	temp->map_lenght = ft_strlen(ft_strtrim(temp->map->content, "\n"));
-	temp->collectibles = 0;
-	game = &temp;
+	game->map = map;
+	game->map->collumns = ft_strlen(map->content[0]);
+	game->map->rows = (ft_strlen(map->content[0]) - 1);
+	game->map->collectibles = 0;
 	if (!map_compliant(game))
 		return (0);
 	return (1);
 }
-
-// error system
-
-// rectangular
-
-// valid path

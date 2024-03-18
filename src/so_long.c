@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:13 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/02/28 15:30:02 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/18 12:29:08 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 {
 	int		ret;
 	t_game	*game;
-	t_list	*map;
+	t_map	*map;
 	//void	*mlx;
 	//void	*mlx_win;
 
@@ -33,7 +33,7 @@ int	main(int argc, char *argv[])
 		return (error("Game struct malloc failed"));
 	if (argc != 2)
 		ret = error("Bad argument");
-	if (ret && !init_map(&game, &map, argv[1]))
+	if (ret && !init_map(game, map, argv[1]))
 		ret = 0;
 
 	//mlx = mlx_init();

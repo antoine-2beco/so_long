@@ -6,138 +6,136 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/12 16:02:13 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/18 12:34:43 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	valid_map_content(t_list **map)
+int	valid_map_content(t_map *map)
 {
-	t_list	*temp;
 	char	*str;
-	int		i;
+	int		x;
+	int		y;
 
-	temp = *map;
-	while (temp)
+	y = 0;
+	while (map->content[y])
 	{
-		i = 0;
-		str = temp->content;
-		while (str[i])
+		x = 0;
+		str = map->content[y];
+		while (str[x])
 		{
-			if (str[i] != '0' && str[i] != '1'
-				&& str[i] != 'C' && str[i] != 'E'
-				&& str[i] != 'P' && str[i] != '\n')
+			if (str[x] != '0' && str[x] != '1'
+				&& str[x] != 'C' && str[x] != 'E'
+				&& str[x] != 'P' && str[x] != '\n')
 				return (error("Bad map content"));
-			if (str[i] == '\n' && i == 0)
+			if (str[x] == '\n' && x == 0)
 				return (error("Bad newline"));
-			i++;
+			x++;
 		}
-		temp = temp->next;
+		y++;
 	}
 	return (1);
 }
 
-int	rectangular_map(t_list **map)
+int	rectangular_map(t_map *map)
 {
-	t_list	*temp;
 	char	*line;
 	int		lenght;
+	int		y;
 
-	temp = *map;
-	line = ft_strtrim(temp->content, "\n");
+	y = 0;
+	line = ft_strtrim(map->content[y], "\n");
 	if (!line)
 		error ("Malloc failed in ft_strtrim");
 	lenght = ft_strlen(line);
 	free (line);
-	while (temp)
+	while (map->content[y])
 	{
-		line = ft_strtrim(temp->content, "\n");
+		line = ft_strtrim(map->content[y], "\n");
 		if (!line)
 			error ("Malloc failed in ft_strtrim");
 		if (lenght != (int)(ft_strlen(line)))
 			return (error("Map is not rectangular"));
 		free (line);
-		temp = temp->next;
+		y++;
 	}
 	return (1);
 }
 
-int	walls_surround(t_list **map, int map_lenght)
+int	walls_surround(t_map *map)
 {
-	t_list	*temp;
-	int		i;
+	int		y;
+	int		x;
 
-	temp = *map;
-	i = 0;
-	while (i < map_lenght)
-		if (((char *)temp->content)[i++] != '1')
+	y = 1;
+	x = 0;
+	while (map->content[0][x++])
+		if (map->content[0][x++] != '1')
 			return (error("Walls aren't surrounding the map"));
-	while (temp->next)
+	while (map->content[y + 1])
 	{
-		if (((char *)temp->content)[0] != '1'
-			|| ((char *)temp->content)[map_lenght - 1] != '1')
+		if ((map->content[y][0] != '1')
+			|| (map->content[y][map->collumns - 1] != '1'))
 			return (error("Walls aren't surrounding the map"));
-		temp = temp->next;
+		y++;
 	}
-	i = 0;
-	while (i < map_lenght)
-		if (((char *)temp->content)[i++] != '1')
+	while (map->content[y][x])
+		if (map->content[y][x++] != '1')
 			return (error("Walls aren't surrounding the map"));
 	return (1);
 }
 
-static int	saving_components(t_game **game)
+static int	saving_components(t_game *game)
 {
-	t_list	*temp;
 	int		x;
 	int		y;
 
-	temp = ((*game)->map);
-	y = -1;
-	while (temp && y++ >= -1)
+	y = 0;
+	while (game->map->content[y])
 	{
-		x = -1;
-		while (x++ < ((*game)->map_lenght - 1))
+		x = 0;
+		while (game->map->content[y][x])
 		{
-			if (((char *)temp->content)[x] == 'E')
+			if (game->map->content[y][x] == 'E')
 			{
-				(*game)->x_exit = x;
-				(*game)->y_exit = y;
+				game->map->exit.x = x;
+				game->map->exit.y = y;
 			}
-			if (((char *)temp->content)[x] == 'P')
+			if (game->map->content[y][x] == 'P')
 			{
-				(*game)->x_spawn = x;
-				(*game)->y_spawn = y;
+				game->map->spawn.x = x;
+				game->map->spawn.y = y;
 			}
+			x++;
 		}
-		temp = temp->next;
+		y++;
 	}
 	return (1);
 }
 
-int	specials_components(t_game **game)
+int	specials_components(t_game *game)
 {
-	t_list	*temp;
-	int		i;
 	int		exit_spawn;
+	int		y;
+	int		x;
 
-	temp = (*game)->map;
 	exit_spawn = 0;
-	while (temp)
+	y = 0;
+	while (game->map->content[y])
 	{
-		i = 0;
-		while (i < (*game)->map_lenght)
+		x = 0;
+		while (game->map->content[y][x])
 		{
-			if (((char *)temp->content)[i] == 'E'
-				|| ((char *)temp->content)[i] == 'P')
+			if ((game->map->content[y][x] == 'E')
+				|| (game->map->content[y][x] == 'P'))
 				exit_spawn++;
-			if (((char *)temp->content)[i++] == 'C')
-				(*game)->collectibles++;
+			if (game->map->content[y][x] == 'C')
+				game->map->collectibles++;
 		}
-		temp = temp->next;
+		y++;
 	}
-	if (exit_spawn != 2 || (*game)->collectibles < 1)
+	if (exit_spawn != 2 || game->map->collectibles < 1)
 		return (error("Map components problem"));
 	saving_components(game);
 	return (1);
