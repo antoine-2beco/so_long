@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/18 12:35:11 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:41:24 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,24 @@ static int	map_parsing(t_map *map, char *map_file)
 {
 	int		fd;
 	char	*line;
-	int		l;
+	char	*content;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
 		return (error("Map opening failed"));
-	l = 0;
-	while (l >= 0)
+	content = ft_strdup("");
+	while (1)
 	{
 		line = get_next_line(fd);
-		if (!line && l == 0)
+		if (!line && ft_strlen(content) == 0)
 			return (error("Map is empty"));
 		if (!line)
 			break ;
-		map->content[l] = line;
-		l++;
+		content = ft_strappend(&content, line);
 	}
+	close(fd);
+	map->content = ft_split(content, '\n');
+	free(content);
 	return (1);
 }
 

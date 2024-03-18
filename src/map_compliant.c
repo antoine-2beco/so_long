@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/18 12:34:43 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:41:12 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	walls_surround(t_map *map)
 
 	y = 1;
 	x = 0;
-	while (map->content[0][x++])
+	while (map->content[0][x])
 		if (map->content[0][x++] != '1')
 			return (error("Walls aren't surrounding the map"));
 	while (map->content[y + 1])
@@ -132,6 +132,7 @@ int	specials_components(t_game *game)
 				exit_spawn++;
 			if (game->map->content[y][x] == 'C')
 				game->map->collectibles++;
+			x++;
 		}
 		y++;
 	}
