@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/18 12:34:39 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:35:13 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-//# include <mlx.h>
+# include <mlx.h>
 # include <fcntl.h>
 # include <stdio.h>
 
@@ -42,12 +42,17 @@ typedef struct s_map
 typedef struct s_game
 {
 	t_map		*map;
+	void		*mlx;
+	void		*win;
 }				t_game;
 
 int	error(char *str);
 
-// check_map.c
-int	init_map(t_game *game, t_map *map, char *map_file);;
+// init_map.c
+int	init_map(t_game *game, t_map *map, char *map_file);
+
+// init_game.c
+int	init_mlx(t_game *game);
 
 // map_compliant.c 
 int	valid_map_content(t_map *map);

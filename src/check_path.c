@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 10:16:06 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/18 12:45:26 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:07:10 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int	check_path(t_game *game)
 	floodfill(backup_map, game->map->spawn.x, game->map->spawn.y);
 	if (backup_map->collectibles != game->map->collectibles
 		|| !backup_map->exit.x)
+	{
+		free(backup_map);
 		j = 1;
+	}
 	while (i < game->map->rows)
 		free((backup_map->content[i++]));
 	free(backup_map->content);
