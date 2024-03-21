@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 10:16:06 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/19 18:07:10 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:29:05 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ int	check_path(t_game *game)
 	free(backup_map->content);
 	free(backup_map);
 	if (j)
-		return (error("Every components doesn't have a path"));
+		error("Every components doesn't have a path", game);
 	return (1);
 }

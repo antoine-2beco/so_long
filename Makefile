@@ -6,7 +6,7 @@
 #    By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 15:13:16 by ade-beco          #+#    #+#              #
-#    Updated: 2024/03/19 18:56:25 by ade-beco         ###   ########.fr        #
+#    Updated: 2024/03/21 14:22:01 by ade-beco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MLX			=		libmlx.a
 MLX_PATH	=		./mlx/
 
 SRC_PATH	=		./src/
-SRCS 		=		so_long.c init_map.c map_compliant.c check_path.c
+SRCS 		=		so_long.c init_map.c init_game.c map_compliant.c check_path.c
 SRCS_D 		=		$(addprefix $(SRC_PATH), $(SRCS))
 
 OBJECTS		=		$(SRCS_D:.c=.o)
@@ -31,18 +31,19 @@ MLX_INC		=		-Lmlx -lmlx -framework OpenGL -framework AppKit
 all: 		$(OBJECTS) $(SO_LONG)
 
 %.o:		%.c
-					@gcc -Wall -Wextra -Werror -Imlx -c $< -o $(<:c=o)
+					gcc -Wall -Wextra -Werror -Imlx -c $< -o $(<:c=o)
 
 $(SO_LONG):	$(OBJECTS)
 					@echo "Compiling Libft..."
 					@make bonus -C $(LIBFT_PATH)
+					@cp $(LIBFT_PATH)$(LIBFT) $(SO_LONG)
 					@echo "OK !"
 					@echo "Compiling Mlx..."
 					@make -C $(MLX_PATH)
 					@echo "OK !"
 					@echo "Compiling and Creating So_Long..."
 					@ar -rcs $(SO_LONG) $(OBJECTS)
-					@gcc $(CFLAGS) $(OBJECTS) $(MLX_INC) $(INC) $(LIBFT_PATH)$(LIBFT) $(MLX_PATH)$(MLX) -o $(SO_LONG)
+					@gcc $(SO_LONG) $(CFLAGS) $(MLX_INC) $(INC) $(MLX_PATH)$(MLX) -o $(SO_LONG)
 					@echo "OK !"
 
 clean:
