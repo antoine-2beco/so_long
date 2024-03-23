@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:32:19 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/21 15:40:19 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/23 18:19:58 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,50 @@ static t_img	new_sprite(t_game *game, char *path)
 static void	init_sprites(t_game *game)
 {
 	game->wall = new_sprite(game, "sprites/bush.xpm");
+	game->floor = new_sprite(game, "sprites/grass.xpm");
 	game->collectibles = new_sprite(game, "sprites/collectible.xpm");
 	game->exit_closed = new_sprite(game, "sprites/door.xpm");
-	game->floor = new_sprite(game, "sprites/grass.xpm");
 	game->player_up = new_sprite(game, "sprites/player.xpm");
+}
+
+static void	find_sprite(t_game *game, int x, int y)
+{
+	char	component;
+
+	component = game->map->content[x][y];
+	if (component == '1')
+		mlx_put_image_to_window(game->mlx, game->win, game->wall.xpm,
+			x * game->wall.x, y * game->wall.y);
+	else if (component == '0')
+		mlx_put_image_to_window(game->mlx, game->win, game->floor.xpm,
+			x * game->floor.x, y * game->floor.y);
+	else if (component == 'C')
+		mlx_put_image_to_window(game->mlx, game->win, game->collectibles.xpm,
+			x * game->collectibles.x, y * game->collectibles.y);
+	else if (component == 'E')
+		mlx_put_image_to_window(game->mlx, game->win, game->exit_closed.xpm,
+			x * game->exit_closed.x, y * game->exit_closed.y);
+	else if (component == 'P')
+		mlx_put_image_to_window(game->mlx, game->win, game->player_up.xpm,
+			x * game->player_up.x, y * game->player_up.y);
+}
+
+static void	map_to_mlx(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < game->map->rows)
+	{
+		x = 0;
+		while (x < game->map->collumns)
+		{
+			find_sprite(game, x, y);
+			x++;
+		}
+		y++;
+	}
 }
 
 int	init_mlx(t_game *game)
@@ -44,6 +84,7 @@ int	init_mlx(t_game *game)
 		error("mlx_new_window failed", game);
 	}
 	init_sprites(game);
+	map_to_mlx(game);
 	mlx_loop(game->mlx);
 	return (1);
 }
