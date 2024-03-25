@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:32:19 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/25 13:32:39 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:44:51 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ static void	find_sprite(t_game *game, int x, int y)
 {
 	char	component;
 
-	ft_printf("%i, %i\n", x, y);
-	ft_printf("%c\n", game->map.content[x][y]);
-	component = game->map.content[x][y];
+	component = game->map.content[y][x];
 	if (component == '1')
 		mlx_put_image_to_window(game->mlx, game->win, game->wall.xpm,
 			x * game->wall.x, y * game->wall.y);
@@ -79,7 +77,7 @@ void	init_mlx(t_game *game)
 	if (!game->mlx)
 		error("mlx_init failed", game);
 	game->win = mlx_new_window(game->mlx,
-			game->map.rows * 50, game->map.collumns * 50, "so_long");
+			game->map.collumns * 50, game->map.rows * 50, "so_long");
 	if (!game->win)
 	{
 		free(game->mlx);

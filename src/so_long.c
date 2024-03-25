@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:13 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/25 13:35:17 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:29:52 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	error(char *str, t_game *game)
 	int	i;
 
 	i = 0;
-	if (game->map_alloc)
+	if (game && game->map_alloc)
 	{
 		while (i < game->map.rows)
 			free(game->map.content[i++]);
@@ -37,7 +37,6 @@ int	main(int argc, char *argv[])
 		error("Bad argument", NULL);
 	game = init_struct();
 	init_map(game, argv[1]);
-	//ft_printf("%s\n", game->map.content[0]);
 	init_mlx(game);
 	return (1);
 }
