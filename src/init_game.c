@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:32:19 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/25 15:44:51 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:41:58 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	init_sprites(t_game *game)
 	game->wall = new_sprite(game, "sprites/bush.xpm");
 	game->floor = new_sprite(game, "sprites/grass.xpm");
 	game->collectibles = new_sprite(game, "sprites/collectible.xpm");
-	game->exit_closed = new_sprite(game, "sprites/door.xpm");
+	game->exit_open = new_sprite(game, "sprites/door_open.xpm");
+	game->exit_closed = new_sprite(game, "sprites/door_close.xpm");
 	game->player_up = new_sprite(game, "sprites/player.xpm");
 }
 
@@ -46,8 +47,14 @@ static void	find_sprite(t_game *game, int x, int y)
 		mlx_put_image_to_window(game->mlx, game->win, game->collectibles.xpm,
 			x * game->collectibles.x, y * game->collectibles.y);
 	else if (component == 'E')
-		mlx_put_image_to_window(game->mlx, game->win, game->exit_closed.xpm,
-			x * game->exit_closed.x, y * game->exit_closed.y);
+	{
+		if (!game->map.collectibles)
+			mlx_put_image_to_window(game->mlx, game->win, game->exit_open.xpm,
+				x * game->exit_open.x, y * game->exit_open.y);
+		else
+			mlx_put_image_to_window(game->mlx, game->win, game->exit_closed.xpm,
+				x * game->exit_closed.x, y * game->exit_closed.y);
+	}
 	else if (component == 'P')
 		mlx_put_image_to_window(game->mlx, game->win, game->player_up.xpm,
 			x * game->player_up.x, y * game->player_up.y);
