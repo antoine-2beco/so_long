@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/21 15:37:01 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 10:50:45 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	init_map(t_game *game, t_map *map, char *map_file)
 		error("Not a .ber file", game);
 	map_parsing(game, map, map_file);
 	game->map = map;
+	game->map_alloc = 1;
 	game->map->collumns = ft_strlen(map->content[0]);
 	game->map->rows = (ft_strlen(map->content[0]) - 1);
 	game->map->collectibles = 0;

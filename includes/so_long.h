@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/21 15:35:38 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 10:50:17 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_game
 	t_img		player_down;
 	t_img		player_left;
 	t_img		player_right;
+
+	int			map_alloc;
 }				t_game;
 
 int	error(char *str, t_game *game);

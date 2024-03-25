@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 10:16:06 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/23 18:28:08 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 10:54:22 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ int	check_path(t_game *game)
 		free(backup_map);
 		error("Every components doesn't have a path", game);
 	}
+	ft_printf("1");
 	i = 0;
 	while (i < game->map->rows)
 		free((backup_map->content[i++]));
+	ft_printf("2");
 	free(backup_map->content);
+	ft_printf("3");
 	free(backup_map);
 	return (1);
 }

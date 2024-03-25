@@ -6,7 +6,7 @@
 #    By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 15:13:16 by ade-beco          #+#    #+#              #
-#    Updated: 2024/03/23 18:20:15 by ade-beco         ###   ########.fr        #
+#    Updated: 2024/03/25 10:46:53 by ade-beco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ MLX_INC		=		-Lmlx -lmlx -framework OpenGL -framework AppKit
 all: 		$(OBJECTS) $(SO_LONG)
 
 %.o:		%.c
-					gcc -Wall -Wextra -Werror -Imlx -c $< -o $(<:c=o)
+					@gcc -Wall -Wextra -Werror -Imlx -c $< -o $(<:c=o)
 
 $(SO_LONG):	$(OBJECTS)
 					@echo "Compiling Libft..."
