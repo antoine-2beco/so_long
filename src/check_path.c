@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 10:16:06 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/25 15:29:34 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:34:31 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 static void	floodfill(t_map *backup_map, int x, int y)
 {
-	if (backup_map->content[y][x] == '1')
+	if (backup_map->content[y][x] == WALL)
 		return ;
-	else if (backup_map->content[y][x] == 'C')
+	else if (backup_map->content[y][x] == COLLECTIBLE)
 	{
-		backup_map->content[y][x] = '1';
+		backup_map->content[y][x] = WALL;
 		backup_map->collectibles++;
 	}
-	else if (backup_map->content[y][x] == 'E')
+	else if (backup_map->content[y][x] == EXIT)
 	{
-		backup_map->content[y][x] = '1';
+		backup_map->content[y][x] = WALL;
 		backup_map->exit.x++;
 		return ;
 	}
-	backup_map->content[y][x] = '1';
+	backup_map->content[y][x] = WALL;
 	floodfill(backup_map, x + 1, y);
 	floodfill(backup_map, x - 1, y);
 	floodfill(backup_map, x, y + 1);
@@ -45,7 +45,7 @@ void	check_path(t_game *game)
 	backup_map->collectibles = 0;
 	backup_map->exit.x = 0;
 	backup_map->content = game->map.content;
-	floodfill(backup_map, game->map.spawn.x, game->map.spawn.y);
+	floodfill(backup_map, game->map.player.x, game->map.player.y);
 	if (backup_map->collectibles != game->map.collectibles
 		|| !backup_map->exit.x)
 	{

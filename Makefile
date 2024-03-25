@@ -6,7 +6,7 @@
 #    By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 15:13:16 by ade-beco          #+#    #+#              #
-#    Updated: 2024/03/25 12:38:36 by ade-beco         ###   ########.fr        #
+#    Updated: 2024/03/25 17:51:42 by ade-beco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MLX			=		libmlx.a
 MLX_PATH	=		./mlx/
 
 SRC_PATH	=		./src/
-SRCS 		=		so_long.c init_struct.c init_map.c init_game.c map_compliant.c check_path.c
+SRCS 		=		so_long.c init_map.c init_game.c map_compliant.c check_path.c key_input.c
 SRCS_D 		=		$(addprefix $(SRC_PATH), $(SRCS))
 
 OBJECTS		=		$(SRCS_D:.c=.o)

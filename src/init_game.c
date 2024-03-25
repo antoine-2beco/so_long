@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:32:19 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/25 16:41:58 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:57:17 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ static void	find_sprite(t_game *game, int x, int y)
 	char	component;
 
 	component = game->map.content[y][x];
-	if (component == '1')
+	if (component == WALL)
 		mlx_put_image_to_window(game->mlx, game->win, game->wall.xpm,
 			x * game->wall.x, y * game->wall.y);
-	else if (component == '0')
+	else if (component == FLOOR)
 		mlx_put_image_to_window(game->mlx, game->win, game->floor.xpm,
 			x * game->floor.x, y * game->floor.y);
-	else if (component == 'C')
+	else if (component == COLLECTIBLE)
 		mlx_put_image_to_window(game->mlx, game->win, game->collectibles.xpm,
 			x * game->collectibles.x, y * game->collectibles.y);
-	else if (component == 'E')
+	else if (component == EXIT)
 	{
 		if (!game->map.collectibles)
 			mlx_put_image_to_window(game->mlx, game->win, game->exit_open.xpm,
@@ -55,12 +55,12 @@ static void	find_sprite(t_game *game, int x, int y)
 			mlx_put_image_to_window(game->mlx, game->win, game->exit_closed.xpm,
 				x * game->exit_closed.x, y * game->exit_closed.y);
 	}
-	else if (component == 'P')
+	else if (component == PLAYER)
 		mlx_put_image_to_window(game->mlx, game->win, game->player_up.xpm,
 			x * game->player_up.x, y * game->player_up.y);
 }
 
-static void	map_to_mlx(t_game *game)
+int	map_to_mlx(t_game *game)
 {
 	int	x;
 	int	y;
@@ -76,6 +76,7 @@ static void	map_to_mlx(t_game *game)
 		}
 		y++;
 	}
+	return (1);
 }
 
 void	init_mlx(t_game *game)
@@ -83,8 +84,8 @@ void	init_mlx(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		error("mlx_init failed", game);
-	game->win = mlx_new_window(game->mlx,
-			game->map.collumns * 50, game->map.rows * 50, "so_long");
+	game->win = mlx_new_window(game->mlx, \
+		game->map.collumns * 50, game->map.rows * 50, "so_long");
 	if (!game->win)
 	{
 		free(game->mlx);
@@ -92,5 +93,4 @@ void	init_mlx(t_game *game)
 	}
 	init_sprites(game);
 	map_to_mlx(game);
-	mlx_loop(game->mlx);
 }
