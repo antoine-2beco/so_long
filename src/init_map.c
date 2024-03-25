@@ -6,13 +6,13 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/25 10:50:45 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:36:00 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static int	map_parsing(t_game *game, t_map *map, char *map_file)
+static void	map_parsing(t_game *game, char *map_file)
 {
 	int		fd;
 	char	*line;
@@ -32,25 +32,24 @@ static int	map_parsing(t_game *game, t_map *map, char *map_file)
 		content = ft_strappend(&content, line);
 	}
 	close(fd);
-	map->content = ft_split(content, '\n');
+	game->map.content = ft_split(content, '\n');
+	game->map_alloc = 1;
 	free(content);
-	return (1);
 }
 
-int	init_map(t_game *game, t_map *map, char *map_file)
+void	init_map(t_game *game, char *map_file)
 {
 	if (!ft_strnstr(map_file + ft_strlen(map_file) - 4, ".ber", 4))
 		error("Not a .ber file", game);
-	map_parsing(game, map, map_file);
-	game->map = map;
+	map_parsing(game, map_file);
 	game->map_alloc = 1;
-	game->map->collumns = ft_strlen(map->content[0]);
-	game->map->rows = (ft_strlen(map->content[0]) - 1);
-	game->map->collectibles = 0;
-	valid_map_content(game, game->map);
-	rectangular_map(game, game->map);
-	walls_surround(game, game->map);
+	game->map.collumns = ft_strlen(game->map.content[0]);
+	game->map.rows = (ft_strlen(game->map.content[0]) - 1);
+	game->map.collectibles = 0;
+	valid_map_content(game);
+	rectangular_map(game);
+	walls_surround(game);
 	specials_components(game);
 	check_path(game);
-	return (1);
+	//ft_printf("%s\n", game->map.content[4]);
 }

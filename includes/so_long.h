@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/25 10:50:17 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:31:21 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_img
 	int			y;
 }				t_img;
 
-
 typedef struct s_map
 {
 	char		**content;
@@ -49,7 +48,7 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	t_map		*map;
+	t_map		map;
 	void		*mlx;
 	void		*win;
 
@@ -68,19 +67,22 @@ typedef struct s_game
 
 int	error(char *str, t_game *game);
 
+// init_struct.c
+t_game	*init_struct(void);
+
 // init_map.c
-int	init_map(t_game *game, t_map *map, char *map_file);
+void	init_map(t_game *game, char *map_file);
 
 // init_game.c
-int	init_mlx(t_game *game);
+void	init_mlx(t_game *game);
 
 // map_compliant.c 
-int	valid_map_content(t_game *game, t_map *map);
-int	rectangular_map(t_game *game, t_map *map);
-int	walls_surround(t_game *game, t_map *map);
-int	specials_components(t_game *game);
+void	valid_map_content(t_game *game);
+void	rectangular_map(t_game *game);
+void	walls_surround(t_game *game);
+void	specials_components(t_game *game);
 
 // check_path.c
-int	check_path(t_game *game);
+void	check_path(t_game *game);
 
 #endif

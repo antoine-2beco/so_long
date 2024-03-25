@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:32:19 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/23 18:19:58 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:32:39 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ static void	find_sprite(t_game *game, int x, int y)
 {
 	char	component;
 
-	component = game->map->content[x][y];
+	ft_printf("%i, %i\n", x, y);
+	ft_printf("%c\n", game->map.content[x][y]);
+	component = game->map.content[x][y];
 	if (component == '1')
 		mlx_put_image_to_window(game->mlx, game->win, game->wall.xpm,
 			x * game->wall.x, y * game->wall.y);
@@ -59,10 +61,10 @@ static void	map_to_mlx(t_game *game)
 	int	y;
 
 	y = 0;
-	while (y < game->map->rows)
+	while (y < game->map.rows)
 	{
 		x = 0;
-		while (x < game->map->collumns)
+		while (x < game->map.collumns)
 		{
 			find_sprite(game, x, y);
 			x++;
@@ -71,13 +73,13 @@ static void	map_to_mlx(t_game *game)
 	}
 }
 
-int	init_mlx(t_game *game)
+void	init_mlx(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		error("mlx_init failed", game);
 	game->win = mlx_new_window(game->mlx,
-			game->map->rows * 50, game->map->collumns * 50, "so_long");
+			game->map.rows * 50, game->map.collumns * 50, "so_long");
 	if (!game->win)
 	{
 		free(game->mlx);
@@ -86,5 +88,4 @@ int	init_mlx(t_game *game)
 	init_sprites(game);
 	map_to_mlx(game);
 	mlx_loop(game->mlx);
-	return (1);
 }

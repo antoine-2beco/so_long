@@ -6,23 +6,23 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/21 15:33:21 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:32:39 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	valid_map_content(t_game *game, t_map *map)
+void	valid_map_content(t_game *game)
 {
 	char	*str;
 	int		x;
 	int		y;
 
 	y = 0;
-	while (map->content[y])
+	while (game->map.content[y])
 	{
 		x = 0;
-		str = map->content[y];
+		str = game->map.content[y];
 		while (str[x])
 		{
 			if (str[x] != '0' && str[x] != '1'
@@ -35,24 +35,23 @@ int	valid_map_content(t_game *game, t_map *map)
 		}
 		y++;
 	}
-	return (1);
 }
 
-int	rectangular_map(t_game *game, t_map *map)
+void	rectangular_map(t_game *game)
 {
 	char	*line;
 	int		lenght;
 	int		y;
 
 	y = 0;
-	line = ft_strtrim(map->content[y], "\n");
+	line = ft_strtrim(game->map.content[y], "\n");
 	if (!line)
 		error ("Malloc failed in ft_strtrim", game);
 	lenght = ft_strlen(line);
 	free (line);
-	while (map->content[y])
+	while (game->map.content[y])
 	{
-		line = ft_strtrim(map->content[y], "\n");
+		line = ft_strtrim(game->map.content[y], "\n");
 		if (!line)
 			error ("Malloc failed in ft_strtrim", game);
 		if (lenght != (int)(ft_strlen(line)))
@@ -60,61 +59,58 @@ int	rectangular_map(t_game *game, t_map *map)
 		free (line);
 		y++;
 	}
-	return (1);
 }
 
-int	walls_surround(t_game *game, t_map *map)
+void	walls_surround(t_game *game)
 {
 	int		y;
 	int		x;
 
 	y = 1;
 	x = 0;
-	while (map->content[0][x])
-		if (map->content[0][x++] != '1')
+	while (game->map.content[0][x])
+		if (game->map.content[0][x++] != '1')
 			error("Walls aren't surrounding the map", game);
-	while (map->content[y + 1])
+	while (game->map.content[y + 1])
 	{
-		if ((map->content[y][0] != '1')
-			|| (map->content[y][map->collumns - 1] != '1'))
+		if ((game->map.content[y][0] != '1')
+			|| (game->map.content[y][game->map.collumns - 1] != '1'))
 			error("Walls aren't surrounding the map", game);
 		y++;
 	}
-	while (map->content[y][x])
-		if (map->content[y][x++] != '1')
+	while (game->map.content[y][x])
+		if (game->map.content[y][x++] != '1')
 			error("Walls aren't surrounding the map", game);
-	return (1);
 }
 
-static int	saving_components(t_game *game)
+static void	saving_components(t_game *game)
 {
 	int		x;
 	int		y;
 
 	y = 0;
-	while (game->map->content[y])
+	while (game->map.content[y])
 	{
 		x = 0;
-		while (game->map->content[y][x])
+		while (game->map.content[y][x])
 		{
-			if (game->map->content[y][x] == 'E')
+			if (game->map.content[y][x] == 'E')
 			{
-				game->map->exit.x = x;
-				game->map->exit.y = y;
+				game->map.exit.x = x;
+				game->map.exit.y = y;
 			}
-			if (game->map->content[y][x] == 'P')
+			if (game->map.content[y][x] == 'P')
 			{
-				game->map->spawn.x = x;
-				game->map->spawn.y = y;
+				game->map.spawn.x = x;
+				game->map.spawn.y = y;
 			}
 			x++;
 		}
 		y++;
 	}
-	return (1);
 }
 
-int	specials_components(t_game *game)
+void	specials_components(t_game *game)
 {
 	int		exit_spawn;
 	int		y;
@@ -122,22 +118,21 @@ int	specials_components(t_game *game)
 
 	exit_spawn = 0;
 	y = 0;
-	while (game->map->content[y])
+	while (game->map.content[y])
 	{
 		x = 0;
-		while (game->map->content[y][x])
+		while (game->map.content[y][x])
 		{
-			if ((game->map->content[y][x] == 'E')
-				|| (game->map->content[y][x] == 'P'))
+			if ((game->map.content[y][x] == 'E')
+				|| (game->map.content[y][x] == 'P'))
 				exit_spawn++;
-			if (game->map->content[y][x] == 'C')
-				game->map->collectibles++;
+			if (game->map.content[y][x] == 'C')
+				game->map.collectibles++;
 			x++;
 		}
 		y++;
 	}
-	if (exit_spawn != 2 || game->map->collectibles < 1)
+	if (exit_spawn != 2 || game->map.collectibles < 1)
 		error("Map components problem", game);
 	saving_components(game);
-	return (1);
 }
