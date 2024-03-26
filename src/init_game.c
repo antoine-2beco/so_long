@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:32:19 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/25 17:57:17 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:32:40 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	init_sprites(t_game *game)
 	game->collectibles = new_sprite(game, "sprites/collectible.xpm");
 	game->exit_open = new_sprite(game, "sprites/door_open.xpm");
 	game->exit_closed = new_sprite(game, "sprites/door_close.xpm");
-	game->player_up = new_sprite(game, "sprites/player.xpm");
+	game->player = new_sprite(game, "sprites/player.xpm");
 }
 
 static void	find_sprite(t_game *game, int x, int y)
@@ -56,8 +56,8 @@ static void	find_sprite(t_game *game, int x, int y)
 				x * game->exit_closed.x, y * game->exit_closed.y);
 	}
 	else if (component == PLAYER)
-		mlx_put_image_to_window(game->mlx, game->win, game->player_up.xpm,
-			x * game->player_up.x, y * game->player_up.y);
+		mlx_put_image_to_window(game->mlx, game->win, game->player.xpm,
+			x * game->player.x, y * game->player.y);
 }
 
 int	map_to_mlx(t_game *game)
@@ -84,6 +84,7 @@ void	init_mlx(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		error("mlx_init failed", game);
+	game->mlx_alloc = 1;
 	game->win = mlx_new_window(game->mlx, \
 		game->map.collumns * 50, game->map.rows * 50, "so_long");
 	if (!game->win)
@@ -91,6 +92,7 @@ void	init_mlx(t_game *game)
 		free(game->mlx);
 		error("mlx_new_window failed", game);
 	}
+	game->win_alloc = 1;
 	init_sprites(game);
 	map_to_mlx(game);
 }

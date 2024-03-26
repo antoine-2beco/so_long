@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/25 18:01:09 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:32:40 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,17 @@ typedef struct s_game
 	t_img		collectibles;
 	t_img		exit_closed;
 	t_img		exit_open;
-	t_img		player_up;
-	t_img		player_down;
-	t_img		player_left;
-	t_img		player_right;
+	t_img		player;
 
 	int			map_alloc;
+	int			mlx_alloc;
+	int			win_alloc;
 	int			movements;
 }				t_game;
 
-int		error(char *str, t_game *game);
+void	error(char *str, t_game *game);
+void	win(t_game *game);
+int		quit(t_game *game);
 
 // init_map.c
 void	init_map(t_game *game, char *map_file);
