@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/26 13:42:35 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:58:51 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	map_parsing(t_game *game, char *map_file)
 		content = ft_strappend(&content, line);
 		free(line);
 		if (!content)
-			error("ft_strappend failed");
+			error("ft_strappend failed", game);
 	}
 	close(fd);
 	game->map.content = ft_split(content, '\n');
@@ -51,6 +51,7 @@ void	init_map(t_game *game, char *map_file)
 	game->map.collectibles = 0;
 	game->map.collumns = ft_strlen(game->map.content[0]);
 	game->map.rows = 0;
+	game->map.player.x = -1;
 	while (game->map.content[game->map.rows])
 		game->map.rows++;
 	valid_map_content(game);

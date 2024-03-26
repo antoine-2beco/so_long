@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/25 17:34:31 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:00:59 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ void	walls_surround(t_game *game)
 			error("Walls aren't surrounding the map", game);
 }
 
-static void	saving_components(t_game *game)
+void	specials_components(t_game *game)
 {
-	int		x;
 	int		y;
+	int		x;
 
 	y = 0;
 	while (game->map.content[y])
@@ -95,44 +95,19 @@ static void	saving_components(t_game *game)
 		while (game->map.content[y][x])
 		{
 			if (game->map.content[y][x] == EXIT)
-			{
-				game->map.exit.x = x;
-				game->map.exit.y = y;
-			}
+				game->map.exit = 1;
 			if (game->map.content[y][x] == PLAYER)
 			{
 				game->map.player.x = x;
 				game->map.player.y = y;
 			}
-			x++;
-		}
-		y++;
-	}
-}
-
-void	specials_components(t_game *game)
-{
-	int		exit_player;
-	int		y;
-	int		x;
-
-	exit_player = 0;
-	y = 0;
-	while (game->map.content[y])
-	{
-		x = 0;
-		while (game->map.content[y][x])
-		{
-			if ((game->map.content[y][x] == EXIT)
-				|| (game->map.content[y][x] == PLAYER))
-				exit_player++;
 			if (game->map.content[y][x] == COLLECTIBLE)
 				game->map.collectibles++;
 			x++;
 		}
 		y++;
 	}
-	if (exit_player != 2 || game->map.collectibles < 1)
+	if (!game->map.exit || game->map.player.x == -1 \
+		|| game->map.collectibles < 1)
 		error("Map components problem", game);
-	saving_components(game);
 }

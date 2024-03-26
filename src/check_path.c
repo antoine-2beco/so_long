@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 10:16:06 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/25 17:34:31 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:56:07 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	floodfill(t_map *backup_map, int x, int y)
 	else if (backup_map->content[y][x] == EXIT)
 	{
 		backup_map->content[y][x] = WALL;
-		backup_map->exit.x++;
+		backup_map->exit++;
 		return ;
 	}
 	backup_map->content[y][x] = WALL;
@@ -43,11 +43,11 @@ void	check_path(t_game *game)
 	if (!backup_map)
 		error("malloc in check_path failed", game);
 	backup_map->collectibles = 0;
-	backup_map->exit.x = 0;
+	backup_map->exit = 0;
 	backup_map->content = game->map.content;
 	floodfill(backup_map, game->map.player.x, game->map.player.y);
 	if (backup_map->collectibles != game->map.collectibles
-		|| !backup_map->exit.x)
+		|| !backup_map->exit)
 	{
 		free(backup_map);
 		error("Every components doesn't have a path", game);

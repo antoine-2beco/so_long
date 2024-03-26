@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/26 13:32:40 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:54:59 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ typedef struct s_map
 	int			rows;
 	int			collumns;
 	int			collectibles;
+	int			exit;
 	t_pos		player;
 	t_pos		last_player;
-	t_pos		exit;
 }				t_map;
 
 typedef struct s_game
