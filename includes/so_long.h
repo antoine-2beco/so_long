@@ -6,20 +6,15 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/26 13:54:59 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:31:35 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <limits.h>
-# include <stdarg.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <mlx.h>
 # include <fcntl.h>
-# include <stdio.h>
 
 # include "../libft/libft.h"
 
@@ -51,6 +46,7 @@ typedef struct s_pos
 typedef struct s_img
 {
 	void		*xpm;
+	int			alloc;
 	int			x;
 	int			y;
 }				t_img;
@@ -82,12 +78,12 @@ typedef struct s_game
 	int			map_alloc;
 	int			mlx_alloc;
 	int			win_alloc;
+	int			sprites_alloc;
 	int			movements;
 }				t_game;
 
 void	error(char *str, t_game *game);
-void	win(t_game *game);
-int		quit(t_game *game);
+int		quit(t_game *game, int win);
 
 // init_map.c
 void	init_map(t_game *game, char *map_file);

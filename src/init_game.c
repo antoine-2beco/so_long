@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:32:19 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/26 13:32:40 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:18:31 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,25 @@ static t_img	new_sprite(t_game *game, char *path)
 
 static void	init_sprites(t_game *game)
 {
+	game->wall.alloc = 0;
+	game->floor.alloc = 0;
+	game->collectibles.alloc = 0;
+	game->exit_open.alloc = 0;
+	game->exit_closed.alloc = 0;
+	game->player.alloc = 0;
+	game->sprites_alloc = 1;
 	game->wall = new_sprite(game, "sprites/bush.xpm");
+	game->wall.alloc = 1;
 	game->floor = new_sprite(game, "sprites/grass.xpm");
+	game->floor.alloc = 1;
 	game->collectibles = new_sprite(game, "sprites/collectible.xpm");
+	game->collectibles.alloc = 1;
 	game->exit_open = new_sprite(game, "sprites/door_open.xpm");
+	game->exit_open.alloc = 1;
 	game->exit_closed = new_sprite(game, "sprites/door_close.xpm");
+	game->exit_closed.alloc = 1;
 	game->player = new_sprite(game, "sprites/player.xpm");
+	game->player.alloc = 1;
 }
 
 static void	find_sprite(t_game *game, int x, int y)
@@ -88,10 +101,7 @@ void	init_mlx(t_game *game)
 	game->win = mlx_new_window(game->mlx, \
 		game->map.collumns * 50, game->map.rows * 50, "so_long");
 	if (!game->win)
-	{
-		free(game->mlx);
 		error("mlx_new_window failed", game);
-	}
 	game->win_alloc = 1;
 	init_sprites(game);
 	map_to_mlx(game);
