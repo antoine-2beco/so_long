@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:33:13 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/26 16:20:03 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 10:37:56 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	move_player(t_game *game, int new_x, int new_y)
 	{
 		game->movements++;
 		ft_printf("Movements : %i\n", game->movements);
-		quit(game, 1);
+		quit(game, 0);
 	}
 	map_to_mlx(game);
 }
@@ -47,6 +47,6 @@ int	key_input(int key, t_game *game)
 	if (key == KEY_S || key == KEY_DOWN)
 		move_player(game, game->map.player.x, game->map.player.y + 1);
 	if (key == KEY_Q || key == KEY_ESC)
-		quit(game, 0);
+		quit(game, 1);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:13 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/26 16:26:40 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 10:37:37 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	error(char *str, t_game *game)
 int	quit(t_game *game, int win)
 {
 	free_memory(game);
-	if (win)
+	if (!win)
 		ft_printf("Well done, you won !\n");
 	exit(EXIT_SUCCESS);
 }

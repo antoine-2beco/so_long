@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/26 16:25:23 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 10:51:16 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ void	init_map(t_game *game, char *map_file)
 	map_parsing(game, map_file);
 	game->movements = 0;
 	game->map_alloc = 1;
-	game->map.collectibles = 0;
 	game->map.collumns = ft_strlen(game->map.content[0]);
 	game->map.rows = 0;
+	game->map.collectibles = 0;
 	game->map.player.x = -1;
+	game->map.exit = 0;
 	while (game->map.content[game->map.rows])
 		game->map.rows++;
 	valid_map_content(game);

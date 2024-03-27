@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/26 15:44:14 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 10:50:29 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,25 +89,25 @@ void	specials_components(t_game *game)
 	int		x;
 
 	y = 0;
-	while (game->map.content[y])
+	while (game->map.content[y] && game->map.collectibles < (INT32_MAX - 1))
 	{
 		x = 0;
-		while (game->map.content[y][x])
+		while (game->map.content[y][x] && game->map.exit < (INT32_MAX - 1))
 		{
 			if (game->map.content[y][x] == EXIT)
-				game->map.exit = 1;
+				game->map.exit++;
 			if (game->map.content[y][x] == PLAYER)
 			{
 				game->map.player.x = x;
 				game->map.player.y = y;
+				game->map.exit++;
 			}
-			if (game->map.content[y][x] == COLLECTIBLE)
+			if (game->map.content[y][x++] == COLLECTIBLE)
 				game->map.collectibles++;
-			x++;
 		}
 		y++;
 	}
-	if (!game->map.exit || game->map.player.x == -1 \
-		|| game->map.collectibles < 1)
+	if (game->map.exit != 2 || game->map.player.x == -1 || y != game->map.rows \
+		|| game->map.collectibles < 1 || x != game->map.collumns)
 		error("Map components problem", game);
 }
