@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 10:16:06 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/26 15:48:28 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:37:41 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	floodfill(t_map *backup_map, int x, int y)
 void	check_path(t_game *game)
 {
 	t_map	*backup_map;
-	int		i;
+	size_t	i;
 
 	backup_map = malloc(sizeof(t_map));
 	if (!backup_map)
@@ -54,7 +54,7 @@ void	check_path(t_game *game)
 	}
 	i = 0;
 	while (i < game->map.rows)
-		free((backup_map->content[i++]));
+		free(backup_map->content[i++]);
 	free(backup_map->content);
 	free(backup_map);
 }

@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:32:19 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/26 16:18:31 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:18:16 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static void	find_sprite(t_game *game, int x, int y)
 
 int	map_to_mlx(t_game *game)
 {
-	int	x;
-	int	y;
+	size_t	x;
+	size_t	y;
 
 	y = 0;
 	while (y < game->map.rows)

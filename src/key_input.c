@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:33:13 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/27 10:37:56 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:36:41 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,16 @@ static void	move_player(t_game *game, int new_x, int new_y)
 		game->map.player.y = new_y;
 		game->map.content[new_y][new_x] = PLAYER;
 		game->movements++;
+		if (game->movements >= SIZE_T_MAX)
+			error("too much movements", game);
 		ft_printf("Movements : %i\n", game->movements);
 	}
 	else if (game->map.content[new_y][new_x] == EXIT \
 		&& !game->map.collectibles)
 	{
 		game->movements++;
+		if (game->movements >= SIZE_T_MAX)
+			error("too much movements", game);
 		ft_printf("Movements : %i\n", game->movements);
 		quit(game, 0);
 	}

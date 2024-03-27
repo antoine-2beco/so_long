@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/27 10:50:29 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:14:34 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	valid_map_content(t_game *game)
 {
 	char	*str;
-	int		x;
-	int		y;
+	size_t	x;
+	size_t	y;
 
 	y = 0;
 	while (game->map.content[y])
@@ -40,8 +40,8 @@ void	valid_map_content(t_game *game)
 void	rectangular_map(t_game *game)
 {
 	char	*line;
-	int		lenght;
-	int		y;
+	size_t	lenght;
+	size_t	y;
 
 	y = 0;
 	line = ft_strtrim(game->map.content[y], "\n");
@@ -54,7 +54,7 @@ void	rectangular_map(t_game *game)
 		line = ft_strtrim(game->map.content[y], "\n");
 		if (!line)
 			error ("Malloc failed in ft_strtrim", game);
-		if (lenght != (int)(ft_strlen(line)))
+		if (lenght != ft_strlen(line))
 			error("Map is not rectangular", game);
 		free (line);
 		y++;
@@ -63,8 +63,8 @@ void	rectangular_map(t_game *game)
 
 void	walls_surround(t_game *game)
 {
-	int		y;
-	int		x;
+	size_t	y;
+	size_t	x;
 
 	y = 1;
 	x = 0;
@@ -85,14 +85,14 @@ void	walls_surround(t_game *game)
 
 void	specials_components(t_game *game)
 {
-	int		y;
-	int		x;
+	size_t	y;
+	size_t	x;
 
 	y = 0;
-	while (game->map.content[y] && game->map.collectibles < (INT32_MAX - 1))
+	while (game->map.content[y] && game->map.collectibles < SIZE_T_MAX)
 	{
 		x = 0;
-		while (game->map.content[y][x] && game->map.exit < (INT32_MAX - 1))
+		while (game->map.content[y][x] && game->map.exit < SIZE_T_MAX)
 		{
 			if (game->map.content[y][x] == EXIT)
 				game->map.exit++;

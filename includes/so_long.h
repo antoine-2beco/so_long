@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/26 16:31:35 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:35:10 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ typedef struct s_img
 typedef struct s_map
 {
 	char		**content;
-	int			rows;
-	int			collumns;
-	int			collectibles;
-	int			exit;
+	size_t		rows;
+	size_t		collumns;
+	size_t		collectibles;
+	size_t		exit;
 	t_pos		player;
 	t_pos		last_player;
 }				t_map;
@@ -79,7 +79,7 @@ typedef struct s_game
 	int			mlx_alloc;
 	int			win_alloc;
 	int			sprites_alloc;
-	int			movements;
+	size_t		movements;
 }				t_game;
 
 void	error(char *str, t_game *game);

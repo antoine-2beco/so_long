@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:13 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/27 10:37:37 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:37:46 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	free_imgs(t_game *game)
 
 static void	free_memory(t_game *game)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (game && game->sprites_alloc)

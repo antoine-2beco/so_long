@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:12:07 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/27 10:51:16 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:40:02 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,23 @@ static void	map_parsing(t_game *game, char *map_file)
 void	init_map(t_game *game, char *map_file)
 {
 	if (!ft_strnstr(map_file + ft_strlen(map_file) - 4, ".ber", 4))
-		error("Not a .ber file", game);
+		error("not a .ber file", game);
 	map_parsing(game, map_file);
 	game->movements = 0;
 	game->map_alloc = 1;
 	game->map.collumns = ft_strlen(game->map.content[0]);
+	if (game->map.collumns >= (SIZE_T_MAX / 50))
+		error("map is too big", game);
 	game->map.rows = 0;
 	game->map.collectibles = 0;
 	game->map.player.x = -1;
 	game->map.exit = 0;
 	while (game->map.content[game->map.rows])
+	{
+		if (game->map.rows >= (SIZE_T_MAX / 50))
+			error("map is too big", game);
 		game->map.rows++;
+	}
 	valid_map_content(game);
 	rectangular_map(game);
 	walls_surround(game);
