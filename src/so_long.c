@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:13 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/27 11:45:41 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:16:24 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static void	free_memory(t_game *game)
 	i = 0;
 	if (game && game->sprites_alloc)
 		free_imgs(game);
-	if (game && game->mlx_alloc)
-		free(game->mlx);
 	if (game && game->win_alloc)
 		mlx_destroy_window(game->mlx, game->win);
+	if (game && game->mlx_alloc)
+		free(game->mlx);
 	if (game && game->map_alloc)
 	{
 		while (i < game->map.rows)
