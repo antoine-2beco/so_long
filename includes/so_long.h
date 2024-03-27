@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:01:15 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/27 11:35:10 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:52:23 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@
 
 # define KEY_Q				12
 # define KEY_ESC  			53
+
+# define SP_BUSH			"sprites/bush.xpm"
+# define SP_GRASS			"sprites/grass.xpm"
+# define SP_COLLECTIBLE		"sprites/collectible.xpm"
+# define SP_DOOR_OPEN		"sprites/door_open.xpm"
+# define SP_DOOR_CLOSE		"sprites/door_close.xpm"
+# define SP_PLAYER			"sprites/player.xpm"
 
 typedef struct s_pos
 {

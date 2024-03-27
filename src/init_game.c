@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:32:19 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/27 11:18:16 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:50:58 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ static void	init_sprites(t_game *game)
 	game->exit_closed.alloc = 0;
 	game->player.alloc = 0;
 	game->sprites_alloc = 1;
-	game->wall = new_sprite(game, "sprites/bush.xpm");
+	game->wall = new_sprite(game, SP_BUSH);
 	game->wall.alloc = 1;
-	game->floor = new_sprite(game, "sprites/grass.xpm");
+	game->floor = new_sprite(game, SP_GRASS);
 	game->floor.alloc = 1;
-	game->collectibles = new_sprite(game, "sprites/collectible.xpm");
+	game->collectibles = new_sprite(game, SP_COLLECTIBLE);
 	game->collectibles.alloc = 1;
-	game->exit_open = new_sprite(game, "sprites/door_open.xpm");
+	game->exit_open = new_sprite(game, SP_DOOR_OPEN);
 	game->exit_open.alloc = 1;
-	game->exit_closed = new_sprite(game, "sprites/door_close.xpm");
+	game->exit_closed = new_sprite(game, SP_DOOR_CLOSE);
 	game->exit_closed.alloc = 1;
-	game->player = new_sprite(game, "sprites/player.xpm");
+	game->player = new_sprite(game, SP_PLAYER);
 	game->player.alloc = 1;
 }
 
