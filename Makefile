@@ -6,7 +6,7 @@
 #    By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 15:13:16 by ade-beco          #+#    #+#              #
-#    Updated: 2024/03/25 17:51:42 by ade-beco         ###   ########.fr        #
+#    Updated: 2024/03/27 11:58:08 by ade-beco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS_D 		=		$(addprefix $(SRC_PATH), $(SRCS))
 OBJECTS		=		$(SRCS_D:.c=.o)
 
 INC			=		-I includes/$(SO_LONG).h -I $(LIBFT_PATH)$(LIBFT).h
-CFLAGS		=		-Wall -Wextra -Werror -fsanitize=address
+CFLAGS		=		-Wall -Wextra -Werror
 MLX_INC		=		-Lmlx -lmlx -framework OpenGL -framework AppKit
 
 all: 		$(OBJECTS) $(SO_LONG)
