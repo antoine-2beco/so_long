@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:58:33 by ade-beco          #+#    #+#             */
-/*   Updated: 2024/03/27 11:14:34 by ade-beco         ###   ########.fr       */
+/*   Updated: 2024/04/06 16:34:14 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	walls_surround(t_game *game)
 			error("Walls aren't surrounding the map", game);
 		y++;
 	}
+	x = 0;
 	while (game->map.content[y][x])
 		if (game->map.content[y][x++] != WALL)
 			error("Walls aren't surrounding the map", game);
