@@ -6,7 +6,7 @@
 #    By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 15:13:16 by ade-beco          #+#    #+#              #
-#    Updated: 2024/04/09 11:24:52 by ade-beco         ###   ########.fr        #
+#    Updated: 2024/04/09 11:29:28 by ade-beco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,14 +49,14 @@ $(SO_LONG):	$(OBJECTS)
 clean:
 					@make clean -C $(LIBFT_PATH)
 					@make clean -C $(MLX_PATH)
-					@echo "Cleaning Push_Swap Objects..."
+					@echo "Cleaning So_Long Objects..."
 					@rm -f $(OBJECTS)
 					@echo "OK !"
 
 fclean:			clean
 					@make fclean -C $(LIBFT_PATH)
 					@make clean -C $(MLX_PATH)
-					@echo "Cleaning Push_Swap..."
+					@echo "Cleaning So_Long..."
 					@rm -f $(SO_LONG)
 					@echo "OK !"
 
