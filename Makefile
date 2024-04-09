@@ -6,7 +6,7 @@
 #    By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/07 15:13:16 by ade-beco          #+#    #+#              #
-#    Updated: 2024/03/27 12:07:17 by ade-beco         ###   ########.fr        #
+#    Updated: 2024/04/09 11:24:52 by ade-beco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ fclean:			clean
 					@make fclean -C $(LIBFT_PATH)
 					@make clean -C $(MLX_PATH)
 					@echo "Cleaning Push_Swap..."
-					@rm -f $(PUSH_SWAP)
+					@rm -f $(SO_LONG)
 					@echo "OK !"
 
 re:			fclean all
